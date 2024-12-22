@@ -1,0 +1,36 @@
+[gd_scene load_steps=3 format=3 uid="uid://cd8lgyd1aojs8"]
+
+[ext_resource type="Texture2D" uid="uid://bhop1cdyv78s4" path="res://caret-right.svg" id="1_3ksu2"]
+[ext_resource type="Script" uid="uid://c6oxvefk7b6as" path="res://nodes/print_node.gd" id="1_gu88u"]
+
+[node name="PrintNode" type="GraphNode"]
+offset_right = 200.0
+offset_bottom = 100.0
+title = "Print"
+ignore_invalid_connection_type = true
+slot/0/left_enabled = true
+slot/0/left_type = 69
+slot/0/left_color = Color(1, 1, 1, 1)
+slot/0/left_icon = ExtResource("1_3ksu2")
+slot/0/right_enabled = true
+slot/0/right_type = 69
+slot/0/right_color = Color(1, 1, 1, 1)
+slot/0/right_icon = ExtResource("1_3ksu2")
+slot/0/draw_stylebox = true
+slot/1/left_enabled = true
+slot/1/left_type = 42
+slot/1/left_color = Color(1, 1, 1, 1)
+slot/1/left_icon = null
+slot/1/right_enabled = false
+slot/1/right_type = 0
+slot/1/right_color = Color(1, 1, 1, 1)
+slot/1/right_icon = null
+slot/1/draw_stylebox = true
+script = ExtResource("1_gu88u")
+
+[node name="String" type="Label" parent="."]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+text = "Value"

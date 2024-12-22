@@ -1,0 +1,65 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="graph nodes"
+run/main_scene="uid://qr52aafdvj5l"
+run/print_header=false
+config/features=PackedStringArray("4.4", "GL Compatibility")
+run/low_processor_mode=true
+boot_splash/show_image=false
+boot_splash/fullsize=false
+boot_splash/use_filter=false
+
+[audio]
+
+driver/driver="Dummy"
+
+[debug]
+
+file_logging/enable_file_logging.pc=false
+file_logging/max_log_files=0
+
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/energy_saving/keep_screen_on=false
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/script-tabs/plugin.cfg")
+
+[file_customization]
+
+folder_colors={
+"res://addons/": "gray",
+"res://nodes/": "orange",
+"res://ui/": "green"
+}
+
+[input_devices]
+
+pen_tablet/driver="dummy"
+pen_tablet/driver.windows="dummy"
+
+[physics]
+
+common/physics_ticks_per_second=1
+common/physics_jitter_fix=0.0
+2d/physics_engine="Dummy"
+3d/physics_engine="Dummy"
+common/enable_object_picking=false
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"

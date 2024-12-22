@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=3 uid="uid://cntot4l0yplii"]
+
+[ext_resource type="Script" uid="uid://cgov82fl4hpxj" path="res://nodes/string_node.gd" id="1_qpj2n"]
+
+[node name="StringNode" type="GraphNode" node_paths=PackedStringArray("line_edit")]
+offset_right = 250.0
+offset_bottom = 86.0
+title = "String"
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color(1, 1, 1, 1)
+slot/0/left_icon = null
+slot/0/right_enabled = true
+slot/0/right_type = 4
+slot/0/right_color = Color(1, 0.929412, 0.631373, 1)
+slot/0/right_icon = null
+slot/0/draw_stylebox = true
+script = ExtResource("1_qpj2n")
+slot/0/right_color = Color(1, 0.929412, 0.631373, 1)
+line_edit = NodePath("LineEdit")
+
+[node name="LineEdit" type="LineEdit" parent="."]
+layout_mode = 2
+placeholder_text = "String"
+context_menu_enabled = false
