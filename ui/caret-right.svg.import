@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bhop1cdyv78s4"
-path="res://.godot/imported/caret-right.svg-fef3695546786de47ae107bddc677593.ctex"
+path="res://.godot/imported/caret-right.svg-83e8fc5b85608a8d1877088b0216b4e7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://caret-right.svg"
-dest_files=["res://.godot/imported/caret-right.svg-fef3695546786de47ae107bddc677593.ctex"]
+source_file="res://ui/caret-right.svg"
+dest_files=["res://.godot/imported/caret-right.svg-83e8fc5b85608a8d1877088b0216b4e7.ctex"]
 
 [params]
 

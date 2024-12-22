@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cd8lgyd1aojs8"]
 
-[ext_resource type="Texture2D" uid="uid://bhop1cdyv78s4" path="res://caret-right.svg" id="1_3ksu2"]
+[ext_resource type="Texture2D" uid="uid://bhop1cdyv78s4" path="res://ui/caret-right.svg" id="1_3ksu2"]
 [ext_resource type="Script" uid="uid://c6oxvefk7b6as" path="res://nodes/print_node.gd" id="1_gu88u"]
 
 [node name="PrintNode" type="GraphNode"]

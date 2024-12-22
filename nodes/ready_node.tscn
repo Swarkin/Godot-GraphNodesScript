@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dwkeqo8f1jixv"]
 
 [ext_resource type="Script" uid="uid://dvwb8u1qywkue" path="res://nodes/ready_node.gd" id="1_7udae"]
-[ext_resource type="Texture2D" uid="uid://bhop1cdyv78s4" path="res://caret-right.svg" id="1_dgv1w"]
+[ext_resource type="Texture2D" uid="uid://bhop1cdyv78s4" path="res://ui/caret-right.svg" id="1_dgv1w"]
 
 [node name="ReadyNode" type="GraphNode"]
 offset_right = 200.0

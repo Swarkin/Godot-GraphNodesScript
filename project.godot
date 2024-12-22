@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="graph nodes"
+config/name="Godot-GraphNodesScript"
 run/main_scene="uid://qr52aafdvj5l"
 run/print_header=false
 config/features=PackedStringArray("4.4", "GL Compatibility")
