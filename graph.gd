@@ -4,6 +4,10 @@ const TYPE_FLOW := 69
 const TYPE_ANY := 42
 
 @export var verbose := false
+@export var hide_scroll := false:
+	set(v):
+		set_process(v)
+		hide_scroll = v
 
 class GraphNodeRepr:
 	var node: GraphNode
@@ -49,6 +53,13 @@ class GraphNodeConnection:
 		from_port = d["from_port"]
 		to_node = nodes[d["to_node"]]
 		to_port = d["to_port"]
+
+func _ready() -> void:
+	set_process(hide_scroll)
+
+func _process(_dt: float) -> void:
+	get_node(^"@Control@2/_h_scroll").visible = false
+	get_node(^"@Control@2/_v_scroll").visible = false
 
 
 func execute() -> void:
@@ -138,10 +149,8 @@ func _on_connection_request(from_node: StringName, from_port: int, to_node: Stri
 
 	connect_node(from_node, from_port, to_node, to_port)
 
-
 func _on_disconnection_request(from_node: StringName, from_port: int, to_node: StringName, to_port: int) -> void:
 	disconnect_node(from_node, from_port, to_node, to_port)
-
 
 func _on_delete_nodes_request(nodes: Array[StringName]) -> void:
 	for node in nodes:
