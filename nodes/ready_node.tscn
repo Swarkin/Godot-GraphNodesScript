@@ -19,7 +19,7 @@ slot/0/right_icon = ExtResource("1_dgv1w")
 slot/0/draw_stylebox = true
 script = ExtResource("1_7udae")
 
-[node name="Label" type="Label" parent="."]
+[node name="Flow" type="Label" parent="."]
 layout_mode = 2
 text = "Flow"
 horizontal_alignment = 2
