@@ -6,8 +6,11 @@ const TYPE_ANY := 42
 @export var verbose := false
 @export var hide_scroll := false:
 	set(v):
-		set_process(v)
 		hide_scroll = v
+		set_process(v)
+
+var _h_scroll: HScrollBar
+var _v_scroll: VScrollBar
 
 class GraphNodeRepr:
 	var node: GraphNode
@@ -54,12 +57,15 @@ class GraphNodeConnection:
 		to_node = nodes[d["to_node"]]
 		to_port = d["to_port"]
 
-func _ready() -> void:
-	set_process(hide_scroll)
+
+func _enter_tree() -> void:
+	for c in get_children(true):
+		if c.name.match("@Control@*"):
+			_h_scroll = c.get_node(^"_h_scroll")
+			_v_scroll = c.get_node(^"_v_scroll")
 
 func _process(_dt: float) -> void:
-	get_node(^"@Control@2/_h_scroll").visible = false
-	get_node(^"@Control@2/_v_scroll").visible = false
+	_set_scroll_visible(!hide_scroll)
 
 
 func execute() -> void:
@@ -159,3 +165,8 @@ func _on_delete_nodes_request(nodes: Array[StringName]) -> void:
 		for conn in connections:
 			if conn["from_node"] == node || conn["to_node"] == node:
 				disconnect_node(conn["from_node"], conn["from_port"], conn["to_node"], conn["to_port"])
+
+
+func _set_scroll_visible(state: bool) -> void:
+	_h_scroll.visible = state
+	_v_scroll.visible = state
