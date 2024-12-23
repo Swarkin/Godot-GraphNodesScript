@@ -1,3 +1,4 @@
+class_name ScriptGraphEdit
 extends GraphEdit
 
 const TYPE_FLOW := 69
@@ -21,7 +22,14 @@ class GraphNodeRepr:
 		node = _node
 
 	func flow_next() -> GraphNodeRepr:
-		var conn := out_connections[0] as GraphNodeConnection if !out_connections.is_empty() else null
+		if out_connections.is_empty(): return null
+		var conn: GraphNodeConnection
+
+		if node is BranchingGraphNode:
+			conn = node.next_flow(out_connections)
+		else:
+			conn = out_connections[0] if !out_connections.is_empty() else null
+
 		return conn.to_node if conn else null
 
 	func get_input(port_idx: int, default = null) -> Variant:
@@ -70,23 +78,8 @@ func _process(_dt: float) -> void:
 
 func execute() -> void:
 	if verbose: print("Executing...")
-	var nodes: Dictionary[StringName, GraphNodeRepr]
+	var nodes := parse()
 
-	#region parsing
-	for node in get_children() as Array[Control]:
-		if node is not GraphNode: continue
-		nodes[node.name] = GraphNodeRepr.new(node)
-
-	for conn in connections:
-		var from := nodes[conn["from_node"] as StringName]
-		var to := nodes[conn["to_node"] as StringName]
-		var from_conn := GraphNodeConnection.new(conn, nodes)
-		var to_conn := GraphNodeConnection.new(conn, nodes)
-		from.out_connections.append(from_conn)
-		to.in_connections.append(to_conn)
-	#endregion
-
-	#region logic
 	var ready_node := nodes["ReadyNode"]
 	if verbose:
 		print(ready_node.node.name)
@@ -127,9 +120,25 @@ func execute() -> void:
 
 		node.execute(args)
 		next = next.flow_next()
-	#endregion
 
 	if verbose: print("\nFinished")
+
+func parse() -> Dictionary[StringName, GraphNodeRepr]:
+	var nodes: Dictionary[StringName, GraphNodeRepr]
+
+	for node in get_children() as Array[Control]:
+		if node is not GraphNode: continue
+		nodes[node.name] = GraphNodeRepr.new(node)
+
+	for conn in connections:
+		var from := nodes[conn["from_node"] as StringName]
+		var to := nodes[conn["to_node"] as StringName]
+		var from_conn := GraphNodeConnection.new(conn, nodes)
+		var to_conn := GraphNodeConnection.new(conn, nodes)
+		from.out_connections.append(from_conn)
+		to.in_connections.append(to_conn)
+
+	return nodes
 
 
 func _on_connection_request(from_node: StringName, from_port: int, to_node: StringName, to_port: int) -> void:

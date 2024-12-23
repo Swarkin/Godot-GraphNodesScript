@@ -5,3 +5,6 @@ extends ValueGraphNode
 
 func get_value() -> String:
 	return line_edit.text
+
+func set_value(v: String) -> void:
+	line_edit.text = v

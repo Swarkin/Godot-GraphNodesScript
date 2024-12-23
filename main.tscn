@@ -1,5 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://qr52aafdvj5l"]
+[gd_scene load_steps=8 format=3 uid="uid://qr52aafdvj5l"]
 
+[ext_resource type="Script" uid="uid://ba0kyhwc8edji" path="res://menu_bar.gd" id="1_1bvp3"]
 [ext_resource type="Script" uid="uid://c4xjo5mavlg5r" path="res://node_selection.gd" id="1_7mycd"]
 [ext_resource type="Script" uid="uid://44j7r8skexf1" path="res://graph.gd" id="1_h2yge"]
 [ext_resource type="Script" uid="uid://bgdixhn7vioeb" path="res://run.gd" id="4_1bvp3"]
@@ -13,17 +14,34 @@ keycode = 4194336
 [sub_resource type="Shortcut" id="Shortcut_1bvp3"]
 events = [SubResource("InputEventKey_h2yge")]
 
-[node name="Main" type="Control"]
-layout_mode = 3
+[node name="Main" type="VBoxContainer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 0
 
-[node name="GraphEdit" type="GraphEdit" parent="."]
-offset_right = 1280.0
-offset_bottom = 720.0
+[node name="Menu" type="HBoxContainer" parent="." node_paths=PackedStringArray("graph", "file_menu")]
+layout_mode = 2
+script = ExtResource("1_1bvp3")
+graph = NodePath("../ScriptGraphEdit")
+file_menu = NodePath("FileMenu")
+
+[node name="FileMenu" type="MenuButton" parent="Menu"]
+layout_mode = 2
+text = "File"
+switch_on_hover = true
+item_count = 3
+popup/item_0/text = "New"
+popup/item_0/id = 0
+popup/item_1/text = "Open"
+popup/item_1/id = 1
+popup/item_2/text = "Save"
+popup/item_2/id = 2
+
+[node name="ScriptGraphEdit" type="GraphEdit" parent="."]
+layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxEmpty_7dm0k")
 grid_pattern = 1
@@ -37,39 +55,39 @@ script = ExtResource("1_h2yge")
 verbose = true
 hide_scroll = true
 
-[node name="Margin" type="MarginContainer" parent="."]
+[node name="Controls" type="MarginContainer" parent="ScriptGraphEdit"]
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = 12
+anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = -82.0
 grow_horizontal = 2
-grow_vertical = 2
+grow_vertical = 0
 mouse_filter = 2
 theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 
-[node name="Bar" type="HBoxContainer" parent="Margin"]
+[node name="Bar" type="HBoxContainer" parent="ScriptGraphEdit/Controls"]
 layout_mode = 2
 size_flags_vertical = 8
 
-[node name="NodeSelection" type="ScrollContainer" parent="Margin/Bar" node_paths=PackedStringArray("graph", "buttons")]
+[node name="NodeSelection" type="ScrollContainer" parent="ScriptGraphEdit/Controls/Bar" node_paths=PackedStringArray("graph", "buttons")]
 layout_mode = 2
 size_flags_horizontal = 3
 follow_focus = true
-horizontal_scroll_mode = 2
-vertical_scroll_mode = 0
 script = ExtResource("1_7mycd")
-graph = NodePath("../../../GraphEdit")
+graph = NodePath("../../..")
 buttons = NodePath("ButtonContainer")
 
-[node name="ButtonContainer" type="HBoxContainer" parent="Margin/Bar/NodeSelection"]
+[node name="ButtonContainer" type="HBoxContainer" parent="ScriptGraphEdit/Controls/Bar/NodeSelection"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Run" type="Button" parent="Margin/Bar" node_paths=PackedStringArray("graph")]
+[node name="Run" type="Button" parent="ScriptGraphEdit/Controls/Bar" node_paths=PackedStringArray("graph")]
 custom_minimum_size = Vector2(100, 50)
 layout_mode = 2
 size_flags_horizontal = 8
@@ -77,8 +95,8 @@ size_flags_vertical = 8
 shortcut = SubResource("Shortcut_1bvp3")
 text = "Run"
 script = ExtResource("4_1bvp3")
-graph = NodePath("../../../GraphEdit")
+graph = NodePath("../../..")
 
-[connection signal="connection_request" from="GraphEdit" to="GraphEdit" method="_on_connection_request"]
-[connection signal="delete_nodes_request" from="GraphEdit" to="GraphEdit" method="_on_delete_nodes_request"]
-[connection signal="disconnection_request" from="GraphEdit" to="GraphEdit" method="_on_disconnection_request"]
+[connection signal="connection_request" from="ScriptGraphEdit" to="ScriptGraphEdit" method="_on_connection_request"]
+[connection signal="delete_nodes_request" from="ScriptGraphEdit" to="ScriptGraphEdit" method="_on_delete_nodes_request"]
+[connection signal="disconnection_request" from="ScriptGraphEdit" to="ScriptGraphEdit" method="_on_disconnection_request"]

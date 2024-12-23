@@ -63,3 +63,4 @@ common/enable_object_picking=false
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+environment/defaults/default_clear_color=Color(0.270588, 0.270588, 0.270588, 1)

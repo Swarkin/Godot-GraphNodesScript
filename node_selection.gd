@@ -3,7 +3,7 @@ extends Container
 const PATH := "res://nodes/"
 const NODE_BUTTON := preload("res://ui/node_button.tscn") as PackedScene
 
-@export var graph: GraphEdit
+@export var graph: ScriptGraphEdit
 @export var buttons: Container
 
 var nodes: Dictionary[String, PackedScene]
